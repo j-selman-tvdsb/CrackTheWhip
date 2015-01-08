@@ -13,14 +13,22 @@
 	<script type="text/javascript" src="js/jquery-1.8.2.js"></script>
 	
 	<script type="text/javascript" >
+
+	/*
+	Crack the Whip
+
+	An application that presents Accelerometer Settings  and responds to 
+	whipping motion as made famous on 'Big Bang Theory'
+
+	*/
 		
-	//globals
+	//declare global variables
 	var options = { frequency: 80 };
 	var previousX;
 	
 	window.onload = function () {
 	     
-		 //init()
+		 
 		 //phoneGap code that calls the init function when the mobile app is ready 
 	     document.addEventListener("deviceready", init, false);
 	}
@@ -34,9 +42,15 @@
 	
 	}
 
+
+	//Display the accelerometer settings on the screen
+	//Detect motion along the x axis
+	//A forward movement results in a postive motion.  A backword motion is a negative number
+	//A postive motion of at least 7 with quick snap back to  at least -2  is what we are listening for
+	//     7 - (-2) = 9
 	function accelerometerSuccess(acceleration) {
-				var display=  'x axis- ' + acceleration.x  + '<br/>' +  
-				              'y axis-' + acceleration.y  +'<br/>' + 
+				var display=  'x axis- ' + acceleration.x + '<br/>' +  
+				              'y axis-' + acceleration.y  + '<br/>' + 
 			                  'z axis-' + acceleration.z  + '<br/>' +     
 				               'timestamp' + acceleration.timestamp
 							   $("#accelerometerDisplay").html(display);
@@ -57,8 +71,14 @@
 	
 	function crackTheWhip(src)
 	{
+		
+		if (device.platform == 'Android') {
+                	src = '/android_asset/www/' + src;
+        }
 		var snd = new Media(src);
+		
 		//var snd = new Audio(src);
+		
 		snd.play();
 
 	}
