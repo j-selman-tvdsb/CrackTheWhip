@@ -15,7 +15,8 @@
 	<script type="text/javascript" >
 		
 	//globals
-	var options = { frequency: 80 };  
+	var options = { frequency: 80 };
+	var previousX;
 	
 	window.onload = function () {
 	     
@@ -38,8 +39,15 @@
 				              'y axis-' + acceleration.y  +'<br/>' + 
 			                  'z axis-' + acceleration.z  + '<br/>' +     
 				               'timestamp' + acceleration.timestamp
-
 							   $("#accelerometerDisplay").html(display);
+
+							  if (previousX-acceleration.x>9)
+							  {
+									crackTheWhip('sounds/whip_crack.mp3')
+							  }
+
+							  previousX = acceleration.x
+							   
 			}
 				  
 			function accelerometerError() {   
@@ -62,7 +70,7 @@
     
     <body>
 		
-    <div id= "accelerometerDisplay" style="position:fixed; top:200px;left:50px;font-size:12pt"></div>
+    <div id= "accelerometerDisplay" style="position:fixed; top:50px;left:50px;font-size:12pt"></div>
 	
 	<div id="divReset" style="position:fixed; top:200px;left:200"><button id="btnPlayWhip" style="{width:90px;height:40px}" onclick="crackTheWhip('sounds/whip_crack.mp3')">Crack The Whip</button></div>
 		
