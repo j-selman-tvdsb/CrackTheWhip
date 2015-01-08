@@ -34,9 +34,9 @@
 	}
 
 	function accelerometerSuccess(acceleration) {
-				var display=  'x axis- ' + acceleration.x  + '\n' +  
-				              'y axis-' + acceleration.y  + '\n' + 
-			                  'z axis-' + acceleration.z  +  '\n' +     
+				var display=  'x axis- ' + acceleration.x  + '<br/>' +  
+				              'y axis-' + acceleration.y  +'<br/>' + 
+			                  'z axis-' + acceleration.z  + '<br/>' +     
 				               'timestamp' + acceleration.timestamp
 
 							   $("#accelerometerDisplay").html(display);
