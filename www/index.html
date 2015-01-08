@@ -14,42 +14,47 @@
 	
 	<script type="text/javascript" >
 		
-	
+	//globals
+	var options = { frequency: 80 };  
 	
 	window.onload = function () {
 	     
-		 init()
+		 //init()
 		 //phoneGap code that calls the init function when the mobile app is ready 
-	     //document.addEventListener("deviceready", init, false);
+	     document.addEventListener("deviceready", init, false);
 	}
 	    
 	
 	function init() {
 
-		//reset or initialize global variables
 		
-		
-
+		// set up sensor for response
+		sensorAcc = navigator.accelerometer.watchAcceleration(accelerometerSuccess, accelerometerError, options);
+	
 	}
+
+	function accelerometerSuccess(acceleration) {
+				var display=  'x axis- ' + acceleration.x  + '\n' +  
+				              'y axis-' + acceleration.y  + '\n' + 
+			                  'z axis-' + acceleration.z  +  '\n' +     
+				               'timestamp' + acceleration.timestamp
+
+							   $("#accelerometerDisplay").html(display);
+			}
+				  
+			function accelerometerError() {   
+				 alert('oooops!');
+		     }
 		
 	
 	function crackTheWhip(src)
 	{
-		var snd = new Audio(src);
+		var snd = new Media(src);
+		//var snd = new Audio(src);
 		snd.play();
 
 	}
-	
-
-	
-	
-
-
-
-
- 
-
-    
+   
 </script>
         <title>Crack The Whip</title>
     </head>
@@ -57,7 +62,7 @@
     
     <body>
 		
-       
+    <div id= "accelerometerDisplay" style="top:100px;left:50px">
 	
 	<div id="divReset" style="position:fixed; top:200px;left:200"><button id="btnPlayWhip" style="{width:90px;height:40px}" onclick="crackTheWhip('sounds/whip_crack.mp3')">Crack The Whip</button></div>
 		
