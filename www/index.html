@@ -40,6 +40,11 @@
 		
 		// set up sensor for response
 		sensorAcc = navigator.accelerometer.watchAcceleration(accelerometerSuccess, accelerometerError, options);
+
+		 getAppVersion(function(version) {
+			 $("#versionDisplay").html("version- " + version);
+    });
+
 	
 	}
 
@@ -50,8 +55,7 @@
 	//A postive motion of at least 7 with quick snap back to  at least -2  is what we are listening for
 	//     7 - (-2) = 9
 	function accelerometerSuccess(acceleration) {
-				var display=  '<h2>Version-' + version + '</h2></br>' +
-							  'x axis- ' + acceleration.x + '<br/>' +  
+				var display=  'x axis- ' + acceleration.x + '<br/>' +  
 				              'y axis-' + acceleration.y  + '<br/>' + 
 			                  'z axis-' + acceleration.z  + '<br/>' +     
 				               'timestamp' + acceleration.timestamp
@@ -91,7 +95,9 @@
     
     
     <body>
-		
+
+	  <div id= "versionDisplay" style="position:fixed; top:40px;left:50px;font-size:15pt"></div>
+	
     <div id= "accelerometerDisplay" style="position:fixed; top:50px;left:50px;font-size:12pt"></div>
 	
 	<div id="divReset" style="position:fixed; top:200px;left:200"><button id="btnPlayWhip" style="{width:90px;height:40px}" onclick="crackTheWhip('sounds/whip_crack.mp3')">Crack The Whip</button></div>
