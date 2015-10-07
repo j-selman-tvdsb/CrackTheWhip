@@ -51,17 +51,17 @@
 
 	//Display the accelerometer settings on the screen
 	//Detect motion along the x axis
-	//A forward movement results in a postive motion.  A backword motion is a negative number
-	//A postive motion of at least 7 with quick snap back to  at least -2  is what we are listening for
-	//     7 - (-2) = 9
+	//A forward movement results in a negative x value.  A backword motion results in a positve value
+	//A backword motion to at least 8 followed by a quick motion to -8 is what we are listening for
+	//     8 - (-8) = 16
 	function accelerometerSuccess(acceleration) {
 				var display=  'x axis- ' + acceleration.x + '<br/>' +  
 				              'y axis-' + acceleration.y  + '<br/>' + 
-			                  'z axis-' + acceleration.z  + '<br/>' +     
+			                      'z axis-' + acceleration.z  + '<br/>' +     
 				               'timestamp' + acceleration.timestamp
 							   $("#accelerometerDisplay").html(display);
 
-							  if (previousX-acceleration.x>9)
+							  if (previousX-acceleration.x>16)
 							  {
 									crackTheWhip('sounds/whip_crack.mp3')
 							  }
