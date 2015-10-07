@@ -38,10 +38,15 @@
 
 		
 		// set up sensor for response
+		//Use this html5 phonegap method called watchAcceleraton
+		//This method has three parameters 
+		//   1) a javascript function that is called when things are working
+		//   2) a javascript function that is called when things are not working
+		//   3) an array of options -- in this case we are setting the frequency that the javascript function is 
+		//	   being called  every 80 milliseconds -- obtained from global variable declared line 26.
 		sensorAcc = navigator.accelerometer.watchAcceleration(accelerometerSuccess, accelerometerError, options);
 
-		getAppVersion(function(version) {
-			 $("#versionDisplay").html("version- " + $.trim(version));
+	
     });
 
 	
@@ -52,7 +57,7 @@
 	//Detect motion along the x axis
 	//A forward movement results in a postive motion.  A backword motion is a negative number
 	//A postive motion of at least 7 with quick snap back to  at least -2  is what we are listening for
-	//     7 - (-2) = 9
+	//     7 - (-2) = 9  
 	function accelerometerSuccess(acceleration) {
 				var display=  'x axis- ' + acceleration.x + '<br/>' +  
 				              'y axis-' + acceleration.y  + '<br/>' + 
@@ -62,6 +67,7 @@
 
 							  if (previousX-acceleration.x>9)
 							  {
+									//call function to play sound
 									crackTheWhip('sounds/whip_crack.mp3')
 							  }
 
@@ -95,13 +101,11 @@
     
     <body>
 
-	<div id= "versionDisplay" style="position:fixed; top:20px;left:50px;font-size:15pt;width:100%"></div>
-	
     <div id= "accelerometerDisplay" style="position:fixed; top:50px;left:50px;font-size:12pt"></div>
 	
 	<div id="divReset" style="position:fixed; top:200px;left:200"><button id="btnPlayWhip" style="{width:90px;height:40px}" onclick="crackTheWhip('sounds/whip_crack.mp3')">Crack The Whip</button></div>
 
-	<div>Hello World</div>
+	<div>Crack the Whip Demo.</div>
 		
     </body>
 </html>
